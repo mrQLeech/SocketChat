@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SocketCommon;
+using System;
+
 
 namespace SocketClientController
 {
     public class RecievedMessageEventArgs: EventArgs
     {
-        public SocketMessageModel.MessageModel Message { get; private set; }
+        public MessageModel Message { get; private set; }
 
-        public RecievedMessageEventArgs(SocketMessageModel.MessageModel message)
+        public RecievedMessageEventArgs(MessageModel message)
         {
             this.Message = message;
         }

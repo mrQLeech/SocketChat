@@ -78,6 +78,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SocketClientController\SocketClientController.csproj">
+      <Project>{99243d3c-adfa-456e-a43d-bb218a3b0a47}</Project>
+      <Name>SocketClientController</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocketCommon\SocketCommon.csproj">
+      <Project>{B7D24F3D-1075-42BE-A5CE-72BDD05BD467}</Project>
+      <Name>SocketCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

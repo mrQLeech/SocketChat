@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocketClientController;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +15,10 @@ namespace SocketClientView
         [STAThread]
         static void Main()
         {
+            ISocketProcessor processor = new SocketClientProcessor();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ChatForm());
+            Application.Run(new ChatForm(processor));
         }
     }
 }

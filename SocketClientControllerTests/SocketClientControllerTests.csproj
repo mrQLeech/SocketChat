@@ -50,8 +50,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SocketClientProcessorTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SocketClientController\SocketClientController.csproj">
+      <Project>{99243D3C-ADFA-456E-A43D-BB218A3B0A47}</Project>
+      <Name>SocketClientController</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocketCommon\SocketCommon.csproj">
+      <Project>{b7d24f3d-1075-42be-a5ce-72bdd05bd467}</Project>
+      <Name>SocketCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

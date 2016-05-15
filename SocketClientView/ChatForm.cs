@@ -6,13 +6,17 @@ namespace SocketClientView
 {
     public partial class ChatForm : Form
     {
-        private IClientProcessor connectionProcessor;
+        private ISocketProcessor connectionProcessor;
 
-        public ChatForm(IClientProcessor processor)
+        public ChatForm(ISocketProcessor processor)
         {
             InitializeComponent();
             connectionProcessor = processor;
-            this.Text = processor.
+            this.Text = processor.GetClientId();
+
+            connectionProcessor.MessageRecieved += OnMessageRecieved;
+
+            connectionProcessor.CreateConnection();
         }
 
         private void sendButton_Click(object sender, EventArgs e)
@@ -34,7 +38,18 @@ namespace SocketClientView
                  && !string.IsNullOrWhiteSpace(messageText.Text))
             {
                 connectionProcessor.SendMessage(messageText.Text);
+                messageText.Text = "";
             }            
+        }
+
+        private void OnMessageRecieved(Object sender, EventArgs arg)
+        {
+            var mess = ((RecievedMessageEventArgs)arg).Message;
+            if (mess.Type == SocketCommon.MessageType.MESSAGE)
+            {
+                chatText.AppendText(mess.SenderName + ": " + mess.Text);
+            }
+            
         }
 
         
