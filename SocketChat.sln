@@ -14,9 +14,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{068D57D2-D54A-46B9-B93F-2B7EDCF1E25F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{61EE07EF-574F-4B8C-824C-93B508E75788}"
-	ProjectSection(SolutionItems) = preProject
-		SocketClientController\IClientProcessor.cs = SocketClientController\IClientProcessor.cs
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketServerView", "SocketServerView\SocketServerView.csproj", "{21017652-3010-473C-B756-ABA46C7976B3}"
 EndProject

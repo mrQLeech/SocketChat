@@ -15,9 +15,7 @@ namespace SocketClientController
       
         public string ClientId { get; private set; }
 
-        static Socket socket;
-        static Thread thread;
-
+     
 
         public event EventHandler MessageRecieved;
 
@@ -44,7 +42,7 @@ namespace SocketClientController
                 }
             }catch(Exception ex)
             {
-                AppendMessage(new MessageModel(MessageType.MESSAGE, "error", "connection failed"));
+                AppendMessage(new MessageModel(MessageType.MESSAGE, "error", "connection failed."  + ex.Message));
             }           
         }
 
@@ -111,6 +109,7 @@ namespace SocketClientController
             using (var stream = new MemoryStream(buffer))
             {
                 IFormatter formatter = new BinaryFormatter();
+              
                 message = (MessageModel)formatter.Deserialize(stream);
                 stream.Close();
             }

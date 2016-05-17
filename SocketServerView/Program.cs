@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocketServerController;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace SocketServerView
     {
         static void Main(string[] args)
         {
+            var s = new SocketServerProcessor();
         }
     }
 }

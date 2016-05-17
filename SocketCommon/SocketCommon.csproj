@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISocketProcessor.cs" />
+    <Compile Include="ModelConverter.cs" />
     <Compile Include="SocketProcessor.cs" />
     <Compile Include="MessageModel.cs" />
     <Compile Include="MessageType.cs" />

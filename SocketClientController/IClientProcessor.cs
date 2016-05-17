@@ -3,7 +3,7 @@
 
 namespace SocketCommon
 {
-    public interface ISocketProcessor
+    public interface IClientProcessor
     {
         void SendMessage(string message);
 

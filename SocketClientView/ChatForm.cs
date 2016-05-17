@@ -1,6 +1,7 @@
 ﻿using System;
 using SocketClientController;
 using System.Windows.Forms;
+using SocketCommon;
 
 namespace SocketClientView
 {
@@ -45,6 +46,8 @@ namespace SocketClientView
         private void OnMessageRecieved(Object sender, EventArgs arg)
         {
             var mess = ((RecievedMessageEventArgs)arg).Message;
+            if (mess == null) return;
+
             if (mess.Type == SocketCommon.MessageType.MESSAGE)
             {
                 chatText.AppendText(mess.SenderName + ": " + mess.Text);
