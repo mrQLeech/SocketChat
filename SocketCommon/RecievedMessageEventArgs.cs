@@ -2,7 +2,7 @@
 using System;
 
 
-namespace SocketClientController
+namespace SocketCommon
 {
     public class RecievedMessageEventArgs: EventArgs
     {

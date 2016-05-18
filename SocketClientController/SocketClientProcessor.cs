@@ -68,6 +68,9 @@ namespace SocketClientController
 
         public void CloseConnection()
         {
+            MessageModel message = new MessageModel(MessageType.DISCONNECT, GetClientId(), "");
+            Send(message);
+
             thread.Abort();
             socket.Close();
         }

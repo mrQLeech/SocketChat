@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ISocketProcessor.cs" />
     <Compile Include="ModelConverter.cs" />
+    <Compile Include="RecievedMessageEventArgs.cs" />
     <Compile Include="SocketProcessor.cs" />
     <Compile Include="MessageModel.cs" />
     <Compile Include="MessageType.cs" />

@@ -11,11 +11,15 @@ namespace SocketCommon
     {
         public string Text { get; set; }
 
+        
         public string SenderName { get; set; }
+
 
         public MessageType Type { get; set; }
 
+
         public MessageModel() { }
+
 
         public MessageModel(MessageType type, string name,  string text)
         {
@@ -24,9 +28,10 @@ namespace SocketCommon
             this.Text = text;
         }
 
+
         public bool IsValid()
         {
-            if ((Type == MessageType.MESSAGE || Type == MessageType.CONNECTION) 
+            if ((Type == MessageType.MESSAGE ) 
                 && (string.IsNullOrEmpty(Text.Trim()) || string.IsNullOrEmpty(SenderName.Trim())))
             {
                 return false;

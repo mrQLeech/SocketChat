@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ServerClientProcessor.cs" />
+    <Compile Include="SocketServerClientObject.cs" />
     <Compile Include="SocketServerProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

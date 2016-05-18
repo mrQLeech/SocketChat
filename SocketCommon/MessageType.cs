@@ -9,8 +9,8 @@ namespace SocketCommon
     public enum MessageType
     {
         MESSAGE,
-        CONNECTION,
-        LOG_DATA
+        LOG_DATA,
+        DISCONNECT
         
     }
 }

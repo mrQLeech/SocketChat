@@ -20,10 +20,12 @@ namespace SocketClientView
             connectionProcessor.CreateConnection();
         }
 
+
         private void sendButton_Click(object sender, EventArgs e)
         {
             SendMessage();
         }
+
 
         private void messageText_KeyUp(object sender, KeyEventArgs e)
         {
@@ -32,6 +34,7 @@ namespace SocketClientView
                 SendMessage();
             }
         }
+
 
         private void SendMessage()
         {
@@ -43,6 +46,7 @@ namespace SocketClientView
             }            
         }
 
+
         private void OnMessageRecieved(Object sender, EventArgs arg)
         {
             var mess = ((RecievedMessageEventArgs)arg).Message;
@@ -50,11 +54,24 @@ namespace SocketClientView
 
             if (mess.Type == SocketCommon.MessageType.MESSAGE)
             {
-                chatText.AppendText(mess.SenderName + ": " + mess.Text);
+                //thread's check
+                if (chatText.InvokeRequired) 
+                    chatText.Invoke(new Action(() =>
+                    {
+                        chatText.AppendText(mess.SenderName + ": " + mess.Text + "\r\n");
+                    }));
+                else 
+                {
+                    chatText.AppendText(mess.SenderName + ": " + mess.Text + "\r\n");
+                }
+                
             }
             
         }
 
-        
+        private void ChatForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            connectionProcessor.CloseConnection();
+        }
     }
 }

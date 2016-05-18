@@ -14,34 +14,79 @@ namespace SocketServerController
 {
     public class SocketServerProcessor 
     {
+        Dictionary<string, SocketServerClientObject> clientDictionary;
+        TcpListener tcpListener;
+        Thread serverThread;
         public SocketServerProcessor()
         {
-            IPHostEntry ipHost = Dns.GetHostEntry("127.0.0.1");
+            clientDictionary = new Dictionary<string, SocketServerClientObject>();
+
             IPAddress ipAddr = IPAddress.Parse("127.0.0.1");
-            TcpListener tcpListener = new TcpListener(ipAddr, 8888);
+            tcpListener = new TcpListener(ipAddr, 8888);
             tcpListener.Start();
             Console.WriteLine("Start of listening");
+            serverThread = new Thread(ServerRun);
+            serverThread.Start();
+        }
 
 
-            while (true)    // Ожидание запроса приемника
+        private void ServerRun()
+        {
+            while (true)   
             {
-
                 Socket clientSocket = tcpListener.AcceptSocket();
                 if (clientSocket.Connected)
                 {
-                    // создаем объект обработчика для данного клиента
-
-                    ServerClientProcessor hand = new ServerClientProcessor(clientSocket);
-                    // создаем поток – оболочку на метод Reader
-                    Thread mythread = new Thread(
-                    new ThreadStart(hand.Reader));
-                    // и запускаем поток
-                    mythread.Start();
+                    var client = new SocketServerClientObject(clientSocket);
+                    clientDictionary.Add(client.ID, client);
+                    client.MessageRecieved += ProcessMessage;
                 }
             }
         }
         
 
-}
+        private void ProcessMessage(Object sender, EventArgs args)
+        {
+            var message = ((RecievedMessageEventArgs)args).Message;
+            switch (message.Type)
+            {
+              
+                case MessageType.DISCONNECT:
+                    {
+                        var id = ((SocketServerClientObject)sender).ID;
+                        clientDictionary[id].Disconnect();
+                        clientDictionary.Remove(id);
+                    }
+                    break;
+
+                case MessageType.LOG_DATA:
+                    break;
+
+                default:
+                    {
+                        foreach (var client in clientDictionary.Values)
+                        {
+                            client.SendMessage(message.Text);
+                        }
+                    }
+                    break;
+            }
+        }
+
+
+        ~SocketServerProcessor()
+        {
+            tcpListener.Stop();
+            serverThread.Abort();
+            foreach( var client in clientDictionary.Values)
+            {
+                client.Disconnect();
+                client.MessageRecieved -= ProcessMessage;
+            }
+        }
+
+    }
+
+    
 
 }
