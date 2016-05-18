@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketServerController", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketCommon", "SocketCommon\SocketCommon.csproj", "{B7D24F3D-1075-42BE-A5CE-72BDD05BD467}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortedLogger", "SortedLogger\SortedLogger.csproj", "{A80E323A-BE3E-4E15-898A-5AF305A62190}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{B7D24F3D-1075-42BE-A5CE-72BDD05BD467}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7D24F3D-1075-42BE-A5CE-72BDD05BD467}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7D24F3D-1075-42BE-A5CE-72BDD05BD467}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A80E323A-BE3E-4E15-898A-5AF305A62190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A80E323A-BE3E-4E15-898A-5AF305A62190}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A80E323A-BE3E-4E15-898A-5AF305A62190}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A80E323A-BE3E-4E15-898A-5AF305A62190}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,5 +61,6 @@ Global
 		{21017652-3010-473C-B756-ABA46C7976B3} = {068D57D2-D54A-46B9-B93F-2B7EDCF1E25F}
 		{DBBC5692-BCC5-40F7-A599-6AB8A0EBFC2D} = {068D57D2-D54A-46B9-B93F-2B7EDCF1E25F}
 		{B7D24F3D-1075-42BE-A5CE-72BDD05BD467} = {61EE07EF-574F-4B8C-824C-93B508E75788}
+		{A80E323A-BE3E-4E15-898A-5AF305A62190} = {068D57D2-D54A-46B9-B93F-2B7EDCF1E25F}
 	EndGlobalSection
 EndGlobal
