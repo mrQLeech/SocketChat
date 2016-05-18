@@ -71,7 +71,19 @@ namespace SocketClientView
 
         private void ChatForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            connectionProcessor.CloseConnection();
+            try
+            {
+                connectionProcessor.CloseConnection();
+
+            }
+            finally { }
+
+        }
+
+        private void ChatForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+          
+            
         }
     }
 }

@@ -53,12 +53,20 @@ namespace SocketServerController
             
             while (true)
             {
-                var buff = new byte[buffSize];                
-                var message = binReader.Read(buff, 0, buffSize);
+                try
+                {
+                    var buff = new byte[buffSize];
+                    var message = binReader.Read(buff, 0, buffSize);
 
 
-                var mess = ModelConverter.BinaryToMessageModel(buff);
-                MessageAppended(mess);
+                    var mess = ModelConverter.BinaryToMessageModel(buff);
+                    MessageAppended(mess);
+                }
+                catch(Exception ex)
+                {
+
+                }
+                
                
             }
         }

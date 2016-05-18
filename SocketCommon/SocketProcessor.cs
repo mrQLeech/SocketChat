@@ -27,16 +27,6 @@ namespace SocketCommon
         }
 
 
-        protected MessageModel ParseRecieveMessage(byte[] buffer)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        protected byte[] ParseSendedMessage(MessageModel message)
-        {
-            throw new NotImplementedException();
-        }
 
 
         protected void AppendMessage(MessageModel message){}

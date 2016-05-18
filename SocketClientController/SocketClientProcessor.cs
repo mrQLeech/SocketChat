@@ -68,7 +68,7 @@ namespace SocketClientController
 
         public void CloseConnection()
         {
-            MessageModel message = new MessageModel(MessageType.DISCONNECT, GetClientId(), "");
+            MessageModel message = new MessageModel(MessageType.DISCONNECT, GetClientId(), "...");
             Send(message);
 
             thread.Abort();
@@ -78,7 +78,8 @@ namespace SocketClientController
 
         private void Send(MessageModel message)
         {
-            var buffer = ParseSendedMessage(message);
+            if (!socket.Connected) return;
+            var buffer = ModelConverter.MessageModelToBinary(message);
             socket.Send(buffer);
         }
 
@@ -87,10 +88,8 @@ namespace SocketClientController
         {
             while (true)
             {
-                Thread.Sleep(333);
-
                 var buffer = GetResponseSocketBuffer();
-                var model = ParseRecieveMessage(buffer);
+                var model = ModelConverter.BinaryToMessageModel(buffer);
                 AppendMessage(model);                 
             }
         }
@@ -103,39 +102,7 @@ namespace SocketClientController
             Array.Resize(ref buffer, recieveSize);
             return buffer;
         }
-
-
-        protected  MessageModel ParseRecieveMessage(byte[] buffer)
-        {
-            MessageModel message;
-
-            using (var stream = new MemoryStream(buffer))
-            {
-                IFormatter formatter = new BinaryFormatter();
-              
-                message = (MessageModel)formatter.Deserialize(stream);
-                stream.Close();
-            }
-
-            return message;
-        }
-
-
-        protected  byte[] ParseSendedMessage(MessageModel message)
-        {
-            byte[] buffer = new byte[1024];
-
-            using (var stream = new MemoryStream())
-            {
-                IFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, message);
-                buffer = stream.ToArray();
-                stream.Close();
-            }
-
-            return buffer;
-        }
-
+        
 
         protected void AppendMessage(MessageModel message)
         {
