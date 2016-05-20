@@ -2,6 +2,7 @@
 using SocketClientController;
 using System.Windows.Forms;
 using SocketCommon;
+using System.Drawing;
 
 namespace SocketClientView
 {
@@ -53,15 +54,21 @@ namespace SocketClientView
 
             if (mess.Type == SocketCommon.MessageType.MESSAGE)
             {
+                var user = mess.SenderName + ": ";
+                var text = mess.Text + "\r\n";
                 //thread's check
                 if (chatText.InvokeRequired) 
                     chatText.Invoke(new Action(() =>
                     {
-                        chatText.AppendText(mess.SenderName + ": " + mess.Text + "\r\n");
+                        
+                        AppendChatColorText(user, Color.Blue);
+                        AppendChatColorText(text, Color.Black);
+                        
                     }));
                 else 
                 {
-                    chatText.AppendText(mess.SenderName + ": " + mess.Text + "\r\n");
+                    AppendChatColorText(user, Color.Blue);
+                    AppendChatColorText(text, Color.Black);
                 }
                 
             }
@@ -74,9 +81,9 @@ namespace SocketClientView
                     chatText.Invoke(new Action(() =>
                     {
                         chatText.AppendText("\r\n");
-                        chatText.AppendText("*************** LOG ***************" + "\r\n");
-                        chatText.AppendText(mess.Text + "\r\n");
-                        chatText.AppendText("************* LOG_END *************" + "\r\n");
+                        AppendChatColorText("*************** LOG ***************" + "\r\n", Color.Green);
+                        AppendChatColorText(mess.Text + "\r\n", Color.Green);
+                        AppendChatColorText("************* LOG_END *************" + "\r\n", Color.Green);
                         chatText.AppendText("\r\n");
                     }));
                 else
@@ -86,6 +93,18 @@ namespace SocketClientView
 
             }
 
+        }
+
+
+        private void AppendChatColorText (string text, Color color)
+        {
+            chatText.SelectionStart = chatText.TextLength;
+            chatText.SelectionLength = 0;
+
+            chatText.SelectionColor = color;
+            chatText.SelectionFont = chatText.Font;
+            chatText.AppendText(text);
+            chatText.SelectionColor = chatText.ForeColor;
         }
 
         private void ChatForm_FormClosing(object sender, FormClosingEventArgs e)

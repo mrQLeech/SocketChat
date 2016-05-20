@@ -11,9 +11,8 @@ namespace SocketServerView
     class Program
     {
         static void Main(string[] args)
-        {
-            string path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var logger = new SortedLoggerObject(path + "\\socket_chat_log.txt");
+        {            
+            var logger = new SortedLoggerObject("socket_chat_log.txt");
             var s = new SocketServerProcessor(logger);
         }
     }

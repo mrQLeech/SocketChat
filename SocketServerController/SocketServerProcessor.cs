@@ -52,7 +52,7 @@ namespace SocketServerController
                     clientDictionary.Add(client.ID, client);
                     
                     client.MessageRecieved += ManageMessage;
-                    Thread.Sleep(500);//error with sending first message. client not statrn main thread
+                    Thread.Sleep(500);//error with sending first message. sometimes client not start main thread at this moment
                     client.SendMessage("", client.ID, MessageType.CONNECT);
 
                 }
@@ -82,10 +82,9 @@ namespace SocketServerController
 
                 default:
                     {
-                        
+                        logger.LogRecord(message.Text + "(" + clnt.ID + ")");
                         foreach (var client in clientDictionary.Values)
-                        {
-                            logger.LogRecord(message.Text + "(" + clnt.ID + ")");
+                        {                           
                             client.SendMessage(message.Text, clnt.ID);
                         }
                     }

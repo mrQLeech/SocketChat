@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.chatText = new System.Windows.Forms.TextBox();
+            this.chatText = new System.Windows.Forms.RichTextBox();
             this.messageText = new System.Windows.Forms.TextBox();
             this.sendButton = new System.Windows.Forms.Button();
             this.logRequestButton = new System.Windows.Forms.Button();
@@ -99,7 +99,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox chatText;
+        private System.Windows.Forms.RichTextBox chatText;
         private System.Windows.Forms.TextBox messageText;
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.Button logRequestButton;
