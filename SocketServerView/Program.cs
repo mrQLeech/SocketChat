@@ -1,4 +1,5 @@
 ﻿using SocketServerController;
+using SortedLogger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,9 @@ namespace SocketServerView
     {
         static void Main(string[] args)
         {
-            var s = new SocketServerProcessor();
+            string path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var logger = new SortedLoggerObject(path + "\\socket_chat_log.txt");
+            var s = new SocketServerProcessor(logger);
         }
     }
 }

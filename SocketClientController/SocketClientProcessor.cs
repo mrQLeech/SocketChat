@@ -29,7 +29,7 @@ namespace SocketClientController
         {
             try
             {
-                thread = new Thread(ThreadProcessor);
+                thread = new Thread(ThreadProcess);
 
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 var ip = IPAddress.Parse("127.0.0.1");
@@ -42,7 +42,7 @@ namespace SocketClientController
                 }
             }catch(Exception ex)
             {
-                AppendMessage(new MessageModel(MessageType.MESSAGE, "error", "connection failed."  + ex.Message));
+                ProcessMessage(new MessageModel(MessageType.MESSAGE, "error", "connection failed."  + ex.Message));
             }           
         }
 
@@ -60,19 +60,22 @@ namespace SocketClientController
         }
 
 
-        public string RequestMessageLog()
+        public void RequestMessageLog()
         {
-            return "";
+            MessageModel message = new MessageModel(MessageType.LOG_DATA, GetClientId(), "");
+            Send(message);
         }
 
 
         public void CloseConnection()
         {
+            thread.Abort();
+            thread = null;
             MessageModel message = new MessageModel(MessageType.DISCONNECT, GetClientId(), "...");
             Send(message);
 
-            thread.Abort();
             socket.Close();
+            socket = null;
         }
 
 
@@ -84,13 +87,13 @@ namespace SocketClientController
         }
 
 
-        private  void ThreadProcessor()
+        private  void ThreadProcess()
         {
             while (true)
             {
                 var buffer = GetResponseSocketBuffer();
                 var model = ModelConverter.BinaryToMessageModel(buffer);
-                AppendMessage(model);                 
+                ProcessMessage(model);                 
             }
         }
 
@@ -104,8 +107,12 @@ namespace SocketClientController
         }
         
 
-        protected void AppendMessage(MessageModel message)
+        protected void ProcessMessage(MessageModel message)
         {
+            if (message.Type == MessageType.CONNECT)
+            {
+                this.ClientId = message.SenderName;
+            }
             OnMessageRecieved(new RecievedMessageEventArgs(message));
         }
 
@@ -119,9 +126,21 @@ namespace SocketClientController
         }
 
 
+        protected bool Connected()
+        {
+            if (socket != null && socket.Connected) return true;
+
+            return false;
+        }
+
+
         ~SocketClientProcessor()
         {
-            CloseConnection();
+            if (Connected())
+            {
+                CloseConnection();
+            }
+            
         }
 
     }

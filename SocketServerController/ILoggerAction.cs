@@ -4,14 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocketCommon
+namespace SocketServerController
 {
-    public enum MessageType
+    interface ILoggerAction
     {
-        MESSAGE,
-        LOG_DATA,
-        CONNECT,
-        DISCONNECT
-        
+        void LogRec(string record);
     }
 }

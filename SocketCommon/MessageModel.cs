@@ -20,6 +20,10 @@ namespace SocketCommon
 
         public MessageModel() { }
 
+        public MessageModel(MessageType type)
+        {
+            this.Type = type;
+        }
 
         public MessageModel(MessageType type, string name,  string text)
         {
@@ -29,15 +33,5 @@ namespace SocketCommon
         }
 
 
-        public bool IsValid()
-        {
-            if ((Type == MessageType.MESSAGE ) 
-                && (string.IsNullOrEmpty(Text.Trim()) || string.IsNullOrEmpty(SenderName.Trim())))
-            {
-                return false;
-            }
-
-            return true;
-        }
     }
 }

@@ -53,6 +53,10 @@
       <Project>{dbbc5692-bcc5-40f7-a599-6ab8a0ebfc2d}</Project>
       <Name>SocketServerController</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SortedLogger\SortedLogger.csproj">
+      <Project>{a80e323a-be3e-4e15-898a-5af305a62190}</Project>
+      <Name>SortedLogger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

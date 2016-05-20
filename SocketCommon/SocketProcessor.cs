@@ -26,9 +26,6 @@ namespace SocketCommon
             return buffer;
         }
 
-
-
-
         protected void AppendMessage(MessageModel message){}
 
 

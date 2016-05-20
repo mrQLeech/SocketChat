@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILoggerAction.cs" />
     <Compile Include="SocketServerClientObject.cs" />
     <Compile Include="SocketServerProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -48,6 +49,10 @@
     <ProjectReference Include="..\SocketCommon\SocketCommon.csproj">
       <Project>{b7d24f3d-1075-42be-a5ce-72bdd05bd467}</Project>
       <Name>SocketCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SortedLogger\SortedLogger.csproj">
+      <Project>{a80e323a-be3e-4e15-898a-5af305a62190}</Project>
+      <Name>SortedLogger</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

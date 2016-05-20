@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocketCommon
+namespace SortedLogger
 {
-    public enum MessageType
+    public interface ILogger
     {
-        MESSAGE,
-        LOG_DATA,
-        CONNECT,
-        DISCONNECT
-        
+        void LogRecord(string record);
+        string GetLog();
+
     }
 }

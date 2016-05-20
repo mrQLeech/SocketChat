@@ -13,7 +13,6 @@ namespace SocketClientView
         {
             InitializeComponent();
             connectionProcessor = processor;
-            this.Text = processor.GetClientId();
 
             connectionProcessor.MessageRecieved += OnMessageRecieved;
 
@@ -66,24 +65,46 @@ namespace SocketClientView
                 }
                 
             }
-            
+
+
+            if (mess.Type == SocketCommon.MessageType.LOG_DATA)
+            {
+                //thread's check
+                if (chatText.InvokeRequired)
+                    chatText.Invoke(new Action(() =>
+                    {
+                        chatText.AppendText("\r\n");
+                        chatText.AppendText("*************** LOG ***************" + "\r\n");
+                        chatText.AppendText(mess.Text + "\r\n");
+                        chatText.AppendText("************* LOG_END *************" + "\r\n");
+                        chatText.AppendText("\r\n");
+                    }));
+                else
+                {
+                    chatText.AppendText(mess.SenderName + ": " + mess.Text + "\r\n");
+                }
+
+            }
+
         }
 
         private void ChatForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
+                connectionProcessor.MessageRecieved -= OnMessageRecieved;
                 connectionProcessor.CloseConnection();
+                connectionProcessor = null;
 
             }
             finally { }
 
         }
 
-        private void ChatForm_FormClosed(object sender, FormClosedEventArgs e)
+
+        private void logRequestButton_Click(object sender, EventArgs e)
         {
-          
-            
+            connectionProcessor.RequestMessageLog();
         }
     }
 }

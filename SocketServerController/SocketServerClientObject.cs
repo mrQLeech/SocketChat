@@ -64,10 +64,9 @@ namespace SocketServerController
                 }
                 catch(Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
 
                 }
-                
-               
             }
         }
 
@@ -88,14 +87,16 @@ namespace SocketServerController
 
         public void Disconnect()
         {
+            listenerThread.Abort();
+            listenerThread = null;
             binWriter.Close();
             netStream.Close();
         }
 
         
-        public void SendMessage(string message, MessageType type = MessageType.MESSAGE)
+        public void SendMessage(string message, string senderId,  MessageType type = MessageType.MESSAGE)
         {
-            var model = new MessageModel(type, ID, message);
+            var model = new MessageModel(type, senderId, message);
             var buff = ModelConverter.MessageModelToBinary(model);
 
             binWriter.Write(buff, 0, buff.Length);
